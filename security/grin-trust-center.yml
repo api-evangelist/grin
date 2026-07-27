@@ -1,0 +1,14 @@
+generated: '2026-07-19'
+method: searched
+probe: true
+source: https://grin.co/security/
+url: https://grin.co/security/
+certifications:
+- SOC 2
+- GDPR
+evidence:
+- source: https://grin.co/security/
+  keywords:
+  - soc 2
+  - trust center
+  - gdpr

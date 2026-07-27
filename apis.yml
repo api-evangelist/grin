@@ -1,8 +1,16 @@
 aid: grin
 name: Grin
-description: Grin is a company surfaced as a portfolio company of 500-global, bond-capital, bullpen-capital
-  and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the
-  enrichment pipeline.
+description: >-
+  GRIN is a creator management and influencer marketing platform for consumer
+  and eCommerce brands, operating in the creator economy. Brands use GRIN to
+  discover creators, manage relationships and content, run affiliate and
+  ambassador programs, handle creator payments, track performance, and measure
+  ROI at scale. The product line includes GRIN Classic, a manual creator and
+  affiliate management platform, and Gia, an AI assistant that automates
+  affiliate program management. GRIN exposes a bi-directional REST API
+  (documented on Stoplight at api.grin.co) so a brand's own software can
+  synchronize creators, content, and program data with GRIN, alongside native
+  integrations for Shopify, Klaviyo, PayPal, Slack, and other commerce tools.
 url: https://raw.githubusercontent.com/api-evangelist/grin/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,17 +20,87 @@ x-backed-by:
 - bullpen-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://grin.co/wp-content/uploads/2022/11/2022_GRIN_Logo_Black_Transparent-Bkgnd-small.webp
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Influencer Marketing
+- Creator Economy
+- Creator Management
+- Affiliate Marketing
+- Marketing
+- Social Media
+- eCommerce
+apis:
+- name: GRIN API
+  description: >-
+    GRIN's bi-directional REST API lets a brand's own software communicate with
+    GRIN to synchronize creators, content, programs, and reporting data.
+    Reference documentation is published on Stoplight at api.grin.co.
+  humanURL: https://api.grin.co/
+  baseURL: https://api.grin.co
+  properties:
+  - type: APIReference
+    url: https://api.grin.co/
+  - type: Documentation
+    url: https://help.grin.co
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/grin-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/grin-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/grin-domain-security.yml
+- type: Security
+  url: https://grin.co/security/
+- type: Compliance
+  url: https://grin.co/security/
 - type: Website
-  url: https://ongrin.com
+  url: https://grin.co
+- type: DeveloperPortal
+  url: https://api.grin.co/
+- type: APIReference
+  url: https://api.grin.co/
+- type: Documentation
+  url: https://help.grin.co
+- type: Support
+  url: https://help.grin.co
+- type: Community
+  url: https://community.grin.co/
+- type: Blog
+  url: https://grin.co/blog
+- type: StatusPage
+  url: https://status.grin.co/
+- type: Integrations
+  url: https://grin.co/integrations/
+- type: SignUp
+  url: https://grin.co/get-started/
+- type: Login
+  url: https://app.grin.co/login
+- type: TermsOfService
+  url: https://grin.co/terms/
+- type: PrivacyPolicy
+  url: https://grin.co/privacy/
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
