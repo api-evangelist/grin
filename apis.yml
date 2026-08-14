@@ -34,7 +34,7 @@ accessModel:
 image: https://grin.co/wp-content/uploads/2022/11/2022_GRIN_Logo_Black_Transparent-Bkgnd-small.webp
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-13'
 tags:
 - Company
 - Influencer Marketing
@@ -57,6 +57,34 @@ apis:
     url: https://api.grin.co/
   - type: Documentation
     url: https://help.grin.co
+  x-note: >-
+    api.grin.co is a Stoplight documentation workspace, not a runtime API host.
+    Its home content links https://grin.stoplight.io/docs/grin-open-api-docs,
+    which returned HTTP 404 on 2026-08-13 on both the Stoplight subdomain and
+    the api.grin.co custom domain, so no OpenAPI could be harvested. The
+    runtime base URL is not published anywhere public and is deliberately not
+    guessed. See lifecycle/grin-lifecycle.yml.
+- name: GRIN Gia MCP Server
+  description: >-
+    GRIN's hosted remote Model Context Protocol server for Gia, its AI agent for
+    creator marketing. GRIN documents that "Gia connects to Claude, ChatGPT, and
+    other assistants that support MCP", and the endpoint answers live: every
+    path returns HTTP 401 with an RFC 9728 challenge naming
+    https://mcp.grin.co/.well-known/oauth-protected-resource, which in turn
+    names the resource https://mcp.grin.co/mcp and the authorization server
+    https://auth.grin.co/. The tool manifest is OAuth-gated, so tools/list could
+    not be read anonymously.
+  humanURL: https://grin.co/gia
+  baseURL: https://mcp.grin.co/mcp
+  properties:
+  - type: MCPServer
+    url: mcp/grin-mcp.yml
+  - type: Authentication
+    url: authentication/grin-authentication.yml
+  - type: OAuthScopes
+    url: scopes/grin-scopes.yml
+  - type: Documentation
+    url: https://grin.co/gia
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -99,8 +127,32 @@ common:
   url: https://grin.co/terms/
 - type: PrivacyPolicy
   url: https://grin.co/privacy/
+- type: Pricing
+  url: https://grin.co/pricing
+- type: MCPServer
+  url: mcp/grin-mcp.yml
+- type: Authentication
+  url: authentication/grin-authentication.yml
+- type: OAuthScopes
+  url: scopes/grin-scopes.yml
+- type: WellKnown
+  url: well-known/grin-well-known.yml
+- type: LLMsTxt
+  url: llms/grin-llms.txt
+- type: Plans
+  url: plans/grin-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/grin-rate-limits.yml
+- type: Lifecycle
+  url: lifecycle/grin-lifecycle.yml
+- type: Conventions
+  url: conventions/grin-conventions.yml
+- type: Conformance
+  url: conformance/grin-conformance.yml
+- type: Packages
+  url: packages/grin-packages.yml
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 14
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
