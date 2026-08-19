@@ -1,0 +1,44 @@
+generated: '2026-08-13'
+method: searched
+source: https://grin.co/pricing
+limit_count: 0
+note: >-
+  GRIN publishes no API rate limits. The pricing page documents a credit meter
+  (200 to 30,000 credits per month by tier, with flat-rate overage under a
+  brand-set cap) which bounds how much WORK Gia performs, but it is a billing
+  quota, not a request-rate contract: no window, no burst, no per-key or
+  per-endpoint scope, and no exhaustion status code are stated. No rate-limit
+  response headers could be observed either — the Gia MCP server answers 401 to
+  every anonymous request and returns no RateLimit-*, X-RateLimit-* or
+  Retry-After header, and the documented REST API reference is unreachable (its
+  Stoplight project 404s), so there is no public surface on which a limit could
+  be read. An agent integrating GRIN cannot discover its throughput budget
+  before hitting it.
+limits: []
+headers:
+  observed: []
+  documented: []
+  retry_after: unknown
+  exhaustion_status: unknown
+quota:
+  kind: credits
+  scope: account
+  period: month
+  values:
+  - {plan: Free, credits: 200}
+  - {plan: Starter, credits: 2000}
+  - {plan: Growth, credits: 7500}
+  - {plan: Scale, credits: 20000}
+  - {plan: Complete, credits: 30000}
+  rollover: false
+  overage_rollover: true
+  source: https://grin.co/pricing
+  note: Billing quota on agent work performed, not an HTTP request-rate limit.
+x-evidence:
+- url: https://grin.co/pricing
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://mcp.grin.co/mcp
+  http_status: 401
+  fetched: '2026-08-13'
+  note: no rate-limit headers present on the anonymous response

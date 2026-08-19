@@ -1,0 +1,108 @@
+generated: '2026-08-13'
+method: searched
+source: https://api.grin.co/
+note: >-
+  GRIN publishes almost no cross-cutting runtime semantics. What follows is only
+  what GRIN itself states on a reachable page, plus what the two live discovery
+  documents and the MCP 401 response actually prove. Nothing is inferred from a
+  spec, because no OpenAPI is publicly reachable (see
+  lifecycle/grin-lifecycle.yml). Where a convention is not published, it is
+  recorded as unknown rather than assumed — in particular there is NO published
+  idempotency contract, so no Idempotency pointer is emitted for GRIN.
+
+architecture:
+  style: REST
+  resource_urls: predictable, resource-oriented
+  encoding: JSON
+  status_codes: standard HTTP
+  mutability: read-only (first public version)
+  source: https://api.grin.co/ (Stoplight workspace home content)
+
+authentication:
+  style: OAuth 2.0 / OIDC bearer token (Auth0 tenant on auth.grin.co)
+  header: 'Authorization: Bearer <token>'
+  applies_to: https://mcp.grin.co/mcp
+  challenge_standard: RFC 9728 protected-resource metadata via WWW-Authenticate
+  rest_api: >-
+    "uses standard HTTP response codes and authentication" is the only statement
+    GRIN publishes about REST auth; the mechanism is not documented publicly.
+  detail: authentication/grin-authentication.yml
+
+idempotency:
+  supported: unknown
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    No idempotency key, header or retry-safety contract is documented anywhere
+    on GRIN's public surface. The REST API is described as read-only, which
+    sidesteps the problem for reads, but the Gia MCP server performs
+    consequential writes (outreach, offers, payments) and publishes no
+    idempotency semantics for them. GRIN's stated control is a human approval
+    gate ("No message, offer, or payment goes out without your sign-off"), which
+    is a governance control, not a retry-safety contract.
+
+pagination:
+  style: unknown
+  params: []
+  response_fields: []
+  note: Not documented on any reachable page.
+
+field_expansion:
+  supported: unknown
+metadata:
+  supported: unknown
+request_tracing:
+  request_id_header: unknown
+  note: No request-id or correlation-id header is documented or observable.
+
+versioning:
+  style: unknown
+  detail: lifecycle/grin-lifecycle.yml
+
+errors:
+  envelope: >-
+    The only error envelope observable on a GRIN-operated host is the MCP
+    server's: {"error":"Unauthorized","message":"Missing bearer token"} returned
+    with HTTP 401 and an RFC 9728 WWW-Authenticate challenge. It is a flat
+    {error, message} JSON object, not RFC 9457 problem+json.
+  rfc9457: false
+  content_type: application/json
+  documented_catalog: false
+  note: >-
+    No error reference is published, so no errors/ artifact was written — a
+    single observed 401 shape is not a catalog.
+
+rate_limits:
+  signaled: false
+  detail: rate-limits/grin-rate-limits.yml
+
+agent_governance:
+  human_in_the_loop: required for messages, offers, contracts and payments
+  autonomy_tiers: [Skills (on-demand), Coaches (guided), Workflows (autonomous)]
+  source: https://grin.co/gia
+
+crawler_policy:
+  robots: https://grin.co/robots.txt
+  content_signal: 'search=yes, ai-input=yes, ai-train=no'
+  allows: [Googlebot, Bingbot, ChatGPT-User, OAI-SearchBot, GPTBot, Claude-Web, PerplexityBot]
+  disallows: [Google-Extended, ClaudeBot, anthropic-ai, CCBot, Amazonbot, Bytespider, Applebot-Extended, cohere-ai]
+  note: >-
+    GRIN separates answer-engine retrieval from model training at the robots
+    layer and says so in a comment, and emits a Content-Signal directive. This
+    is a deliberate, documented agent-access posture — unusual and worth
+    recording — though it governs the marketing site, not the API.
+
+x-evidence:
+- url: https://api.grin.co/
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://grin.co/robots.txt
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://mcp.grin.co/mcp
+  http_status: 401
+  fetched: '2026-08-13'
+- url: https://grin.co/gia
+  http_status: 200
+  fetched: '2026-08-13'

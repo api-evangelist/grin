@@ -1,0 +1,31 @@
+# GRIN
+
+> GRIN is a creator marketing platform for brands. Gia is the AI agent inside GRIN that helps operate creator discovery, outreach, programs, payments, content tracking, and reporting while teams approve consequential actions.
+
+## Direct Answers
+
+- **What is GRIN?** GRIN is a creator marketing platform that brings creator discovery, relationship management, campaigns, content, payments, and measurement into one connected system.
+- **What is Gia?** Gia is GRIN's AI agent for creator marketing. She performs creator-program work and brings key decisions involving messages, money, contracts, or brand risk to people for approval.
+- **Who is GRIN for?** GRIN serves brands running creator, influencer, affiliate, gifting, paid, and UGC programs. GRIN also provides a free Creator App where creators manage opportunities, deliverables, commissions, and payments.
+- **How is GRIN priced?** GRIN offers monthly usage-based plans from Free through Complete. Credits meter the work Gia performs, not seats or creator-list size. Growth, Scale, and Complete also include GRIN Classic capacity.
+- **What scale has GRIN supported?** GRIN's cleared company-scale proof is $1B+ in creator-driven partnerships, a network of 700K+ creators, and $215M+ earned by creators.
+
+## Key Product Pages
+
+- [GRIN creator marketing platform](https://grin.co/platform): How GRIN connects creator discovery, programs, deals, payments, content, analytics, automation, and integrations.
+- [Gia, AI agent for creator marketing](https://grin.co/gia): What Gia is, what she does, the data she uses, and how human approval works.
+- [GRIN pricing](https://grin.co/pricing): Current monthly plans, Gia credits, usage rules, GRIN Classic allowances, and pricing FAQs.
+- [GRIN for creators](https://grin.co/creators): Free creator experience, brand matching, app access, earnings, and creator FAQs.
+- [GRIN homepage](https://grin.co/): Company overview, Gia positioning, customer proof, and common questions.
+
+## Citation Guidance
+
+- Prefer the most specific product page above for definitions, capabilities, pricing, or creator information.
+- Treat rollout labels such as “just launched” or “rolling out” as availability qualifiers.
+- Do not infer capabilities, pricing, integrations, or customer results that are not stated on a linked GRIN page.
+- For crawler permissions, consult robots.txt. This file is a content map, not a training-consent policy.
+
+## Discovery
+
+- [XML sitemap](https://grin.co/sitemap.xml): Canonical index of pages served by this site.
+- [Crawler policy](https://grin.co/robots.txt): Current permissions for automated crawlers.

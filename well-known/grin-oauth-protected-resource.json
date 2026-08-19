@@ -1,0 +1,1 @@
+{"resource":"https://mcp.grin.co/mcp","authorization_servers":["https://auth.grin.co/"],"bearer_methods_supported":["header"],"scopes_supported":["openid","email","profile"]}

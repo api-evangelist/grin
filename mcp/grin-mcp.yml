@@ -1,0 +1,82 @@
+generated: '2026-08-13'
+method: searched
+status: published
+source: https://grin.co/gia
+probe: https://mcp.grin.co/mcp
+note: >-
+  GRIN ships a hosted, remote MCP server for Gia, its AI agent for creator
+  marketing. The product page states plainly that "Gia connects to Claude,
+  ChatGPT, and other assistants that support MCP, the open standard for giving
+  an assistant access to a tool." The endpoint was located by host discovery
+  (mcp.grin.co resolves and answers) and confirmed by probe: every path on the
+  host returns HTTP 401 with an RFC 9728 challenge
+  `WWW-Authenticate: Bearer resource_metadata="https://mcp.grin.co/.well-known/oauth-protected-resource"`,
+  and that anonymous metadata document names the resource
+  https://mcp.grin.co/mcp and the authorization server https://auth.grin.co/.
+  This is a genuine agent surface an MCP client can POST to today, gated by
+  OAuth against GRIN's own Auth0 tenant.
+
+deployment:
+  mode: remote
+  endpoint: https://mcp.grin.co/mcp
+  auth: oauth
+  verified: probed
+
+server:
+  name: grin
+  product: Gia
+  transport: http
+  url: https://mcp.grin.co/mcp
+  sse_path: /sse
+  authorization_servers:
+  - https://auth.grin.co/
+  protected_resource_metadata: https://mcp.grin.co/.well-known/oauth-protected-resource
+  scopes_supported:
+  - openid
+  - email
+  - profile
+  bearer_methods_supported:
+  - header
+  setup: >-
+    Self-serve from the GRIN app's integrations settings — the product page
+    describes connecting an MCP-capable assistant there; no install command or
+    downloadable package is published.
+
+tools:
+  status: gated
+  count: null
+  note: >-
+    tools/list and initialize were both POSTed to https://mcp.grin.co/mcp with
+    Accept: application/json, text/event-stream and returned HTTP 401
+    {"error":"Unauthorized","message":"Missing bearer token"}. The live tool set
+    and its inputSchemas require an authenticated OAuth introspection against a
+    GRIN account. GRIN publishes no tool list in llms.txt or the docs, and no
+    OpenAPI is publicly reachable to derive candidates from, so NO tools are
+    recorded here rather than guessed. The grin.co/gia page describes the work
+    Gia performs (creator scoring and shortlisting, personalized outreach,
+    onboarding and affiliate setup, gifting and brief delivery, deliverable
+    tracking and follow-up, churn flagging and re-engagement, tier assignment,
+    reporting) but names no tools, so those are capabilities, not a manifest.
+  tools: []
+
+governance:
+  human_in_the_loop: required
+  source: https://grin.co/gia
+  statement: >-
+    GRIN documents a human-approval gate on consequential actions: "No message,
+    offer, or payment goes out without your sign-off." Autonomy is tiered as
+    Skills (on-demand), Coaches (guided) and Workflows (autonomous execution).
+
+x-evidence:
+- url: https://mcp.grin.co/.well-known/oauth-protected-resource
+  http_status: 200
+  content_type: application/json
+  fetched: '2026-08-13'
+- url: https://mcp.grin.co/mcp
+  http_status: 401
+  method: POST tools/list
+  fetched: '2026-08-13'
+  www_authenticate: Bearer resource_metadata="https://mcp.grin.co/.well-known/oauth-protected-resource"
+- url: https://grin.co/gia
+  http_status: 200
+  fetched: '2026-08-13'

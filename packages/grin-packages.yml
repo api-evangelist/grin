@@ -1,0 +1,59 @@
+generated: '2026-08-13'
+method: searched
+source: registry.npmjs.org, pypi.org, api.github.com, https://help.grin.co/en/, https://grin.co/gia
+package_count: 0
+official_count: 0
+note: >-
+  GRIN publishes no first-party client libraries. npm and PyPI were searched and
+  the obvious candidate names probed directly; the two 200s are both unrelated
+  third-party projects and are recorded below as explicit NEGATIVE matches so a
+  later pass does not re-adopt them. There is also no GRIN GitHub organisation —
+  github.com/grin-co resolves to an empty personal User account with 0 public
+  repositories, and no other org on GitHub named grin belongs to this company.
+  Consistent with that, the Gia MCP server is distribution-free: it is a hosted
+  remote endpoint (https://mcp.grin.co/mcp) configured from the GRIN app's
+  integrations settings, with no npx package, no install command and nothing to
+  version — see mcp/grin-mcp.yml.
+
+packages: []
+
+negative_matches:
+- registry: npm
+  name: grin
+  url: https://www.npmjs.com/package/grin
+  status: 200
+  official: false
+  reason: >-
+    "Super simple and non-recursive merge sort" by calvinmetcalf
+    (github.com/calvinmetcalf/grin). Unrelated to GRIN the creator-marketing
+    platform.
+- registry: pypi
+  name: grin
+  url: https://pypi.org/project/grin/
+  status: 200
+  official: false
+  reason: >-
+    "A grep program configured the way I like it" by Robert Kern. Unrelated.
+
+probed_absent:
+- {registry: npm, name: '@grin/sdk', status: 404}
+- {registry: npm, name: grin-api, status: 404}
+- {registry: npm, name: grin-sdk, status: 404}
+- {registry: npm, name: '@grinco/sdk', status: 404}
+- {registry: pypi, name: grin-api, status: 404}
+- {registry: pypi, name: grin-sdk, status: 404}
+
+registries_searched:
+- npm
+- PyPI
+- GitHub (org/user lookup + org search)
+
+x-evidence:
+- url: https://registry.npmjs.org/-/v1/search?text=grin%20creator%20marketing
+  http_status: 200
+  fetched: '2026-08-13'
+  result: no first-party GRIN package in results
+- url: https://api.github.com/users/grin-co
+  http_status: 200
+  fetched: '2026-08-13'
+  result: empty User account, 0 public repos, no blog URL

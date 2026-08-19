@@ -1,0 +1,100 @@
+generated: '2026-08-13'
+method: searched
+source: https://api.grin.co/
+note: >-
+  GRIN's REST API is self-described on its own documentation host as a first,
+  read-only public version. The single most important lifecycle fact found this
+  pass is that the API reference GRIN links to is BROKEN: the Stoplight
+  workspace at api.grin.co renders home content whose only link is
+  https://grin.stoplight.io/docs/grin-open-api-docs, and that URL returns HTTP
+  404 on both grin.stoplight.io and the api.grin.co custom domain. The
+  workspace record was last updated 2026-05-15. So the documented REST surface
+  is currently undiscoverable while the newer agent surface (the Gia MCP server
+  at mcp.grin.co) is live but undocumented — the two have swapped places with
+  no deprecation notice tying them together.
+
+versioning:
+  scheme: unknown
+  current: null
+  policy_url: null
+  note: >-
+    No versioning policy is published. The API is described as "the first public
+    version" and no version identifier, header or URI convention is stated on
+    any reachable page.
+
+api_status:
+  maturity: first public version
+  mutability: read-only
+  statement: >-
+    "The Grin API is organized around REST. Our API has predictable
+    resource-oriented URLs, returns JSON-encoded responses, and uses standard
+    HTTP response codes and authentication. This is the first public version of
+    Grin's API and as such, is currently read-only. In the future, we plan to
+    support the ability to create and modify account data via this API."
+  source: https://api.grin.co/ (Stoplight workspace home content)
+
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: >-
+    No deprecation or sunset policy is published, and no RFC 8594
+    Sunset/Deprecation header behaviour could be observed — there is no
+    reachable API host to observe. No Deprecation pointer is emitted.
+
+sla:
+  url: null
+  uptime_target: null
+
+status_page:
+  url: https://status.grin.co/
+  provider: Instatus
+  public: true
+  incidents_open: 0
+  components:
+  - Content Collection
+  - Live Site
+  - Affiliate Tracking
+  - Creator Communications
+  - Program Management
+  - Creator Management
+  - Tool Integrations
+  - Ecommerce Integrations
+  - Creator Discovery
+  - Payments
+  note: >-
+    Ten monitored components, all operational at probe time. The components are
+    product areas; no component covers the API or the MCP server specifically,
+    so an agent watching status.grin.co cannot tell whether the machine surface
+    is up.
+
+changelog:
+  url: null
+  note: >-
+    No dated public changelog was found for the API, the platform, or Gia. No
+    changelog/ artifact was written.
+
+broken_documentation:
+- url: https://grin.stoplight.io/docs/grin-open-api-docs
+  http_status: 404
+  linked_from: https://api.grin.co/
+  detail: >-
+    The only API-documentation link GRIN publishes returns 404 on both the
+    Stoplight subdomain and the api.grin.co custom domain. The Stoplight node
+    API at api.grin.co/api/v1/projects/grin/grin-open-api-docs/nodes/... returns
+    404 for every candidate spec path, so no OpenAPI could be recovered.
+
+deprecated_operations: []
+
+x-evidence:
+- url: https://api.grin.co/
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://grin.stoplight.io/docs/grin-open-api-docs
+  http_status: 404
+  fetched: '2026-08-13'
+- url: https://api.grin.co/docs/grin-open-api-docs
+  http_status: 404
+  fetched: '2026-08-13'
+- url: https://status.grin.co/
+  http_status: 200
+  fetched: '2026-08-13'

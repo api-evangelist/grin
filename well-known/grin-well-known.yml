@@ -1,0 +1,120 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every GRIN-controlled host found in apis.yml
+note: >-
+  Probed five GRIN hosts. The marketing site (grin.co) and the Stoplight-hosted
+  documentation host (api.grin.co) serve nothing at /.well-known/ — every path
+  returns the site's own HTML 404. The real discovery surface sits on the two
+  hosts that actually carry the agent/identity plumbing: auth.grin.co (GRIN's
+  Auth0 tenant, which serves OIDC discovery and RFC 8414 authorization-server
+  metadata) and mcp.grin.co (GRIN's hosted MCP server, which serves RFC 9728
+  OAuth protected-resource metadata pointing back at auth.grin.co).
+hosts:
+- host: https://auth.grin.co
+  role: identity provider (Auth0 tenant) for app.grin.co and mcp.grin.co
+- host: https://mcp.grin.co
+  role: hosted remote MCP server (Gia)
+- host: https://grin.co
+  role: marketing site
+- host: https://api.grin.co
+  role: Stoplight-hosted API documentation workspace (not a runtime API host)
+- host: https://help.grin.co
+  role: Intercom-hosted help center
+documents:
+- host: https://auth.grin.co
+  path: /.well-known/openid-configuration
+  status: 200
+  content_type: application/json
+  file: grin-openid-configuration.json
+- host: https://auth.grin.co
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  file: grin-oauth-authorization-server.json
+- host: https://mcp.grin.co
+  path: /.well-known/oauth-protected-resource
+  status: 200
+  content_type: application/json
+  file: grin-oauth-protected-resource.json
+- host: https://help.grin.co
+  path: /.well-known/security.txt
+  status: 200
+  content_type: text/plain
+  file: null
+  note: >-
+    A real RFC 9116 document is served here, but it is INTERCOM's, not GRIN's —
+    Canonical is https://app.intercom.com/.well-known/security.txt and the
+    contacts are security@intercom.com / bugcrowd.com/intercom. help.grin.co is
+    a vendor-hosted help center, so this document says nothing about GRIN's own
+    disclosure program. Not saved and not wired as a SecurityTxt pointer;
+    GRIN's own disclosure posture is captured in
+    security/grin-vulnerability-disclosure.yml from https://grin.co/security/.
+- host: https://grin.co
+  path: /.well-known/security.txt
+  status: 404
+- host: https://grin.co
+  path: /.well-known/openid-configuration
+  status: 404
+- host: https://grin.co
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: https://grin.co
+  path: /.well-known/api-catalog
+  status: 404
+- host: https://grin.co
+  path: /.well-known/ai-plugin.json
+  status: 404
+- host: https://grin.co
+  path: /.well-known/oauth-protected-resource
+  status: 404
+- host: https://api.grin.co
+  path: /.well-known/security.txt
+  status: 404
+- host: https://api.grin.co
+  path: /.well-known/openid-configuration
+  status: 404
+- host: https://api.grin.co
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: https://api.grin.co
+  path: /.well-known/api-catalog
+  status: 404
+- host: https://api.grin.co
+  path: /.well-known/ai-plugin.json
+  status: 404
+- host: https://api.grin.co
+  path: /.well-known/oauth-protected-resource
+  status: 404
+- host: https://auth.grin.co
+  path: /.well-known/security.txt
+  status: 404
+- host: https://auth.grin.co
+  path: /.well-known/api-catalog
+  status: 404
+- host: https://auth.grin.co
+  path: /.well-known/ai-plugin.json
+  status: 404
+- host: https://auth.grin.co
+  path: /.well-known/oauth-protected-resource
+  status: 404
+- host: https://mcp.grin.co
+  path: /.well-known/oauth-authorization-server
+  status: 404
+  note: MCP server delegates to auth.grin.co via the protected-resource document.
+- host: https://mcp.grin.co
+  path: /.well-known/agent-card.json
+  status: 404
+- host: https://mcp.grin.co
+  path: /.well-known/agent.json
+  status: 404
+agent_card:
+  found: false
+  note: >-
+    /.well-known/agent-card.json and /.well-known/agent.json were probed on
+    grin.co, api.grin.co, auth.grin.co, mcp.grin.co, status.grin.co,
+    community.grin.co and creators.grin.co. Every one returned 404. No A2A
+    agent card exists, so no a2a/ artifact was written.
+x-evidence:
+  fetched: '2026-08-13'
+  probes: 40
+  hits: 4

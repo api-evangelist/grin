@@ -1,0 +1,109 @@
+generated: '2026-08-13'
+method: probed
+source: https://auth.grin.co/.well-known/openid-configuration
+note: >-
+  Scopes are read from the two anonymous discovery documents GRIN's own hosts
+  serve, not from an OpenAPI (none is publicly reachable) and not from a docs
+  scopes reference (GRIN publishes none). Two distinct scope sets exist and are
+  kept separate here: the identity scopes the auth.grin.co tenant advertises,
+  and the much smaller set the Gia MCP server actually requires as a protected
+  resource. GRIN publishes NO product/permission scopes — nothing of the form
+  read:creators or write:programs is advertised anywhere public — so the MCP
+  server's authorization is account-wide identity rather than scoped capability.
+  That is a real finding about the agent surface, not a gap in this probe.
+
+schemes:
+- name: GrinOIDC
+  source: well-known/grin-openid-configuration.json
+  issuer: https://auth.grin.co/
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.grin.co/authorize
+    tokenUrl: https://auth.grin.co/oauth/token
+  - flow: clientCredentials
+    tokenUrl: https://auth.grin.co/oauth/token
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://auth.grin.co/oauth/device/code
+    tokenUrl: https://auth.grin.co/oauth/token
+
+scopes:
+- scope: openid
+  description: OIDC authentication; issues an ID token identifying the GRIN user.
+  flows: [authorizationCode, clientCredentials, deviceCode]
+  required_by: [https://mcp.grin.co/mcp]
+  sources: [well-known/grin-openid-configuration.json, well-known/grin-oauth-protected-resource.json]
+- scope: profile
+  description: Basic profile claims for the authenticated GRIN user.
+  flows: [authorizationCode, deviceCode]
+  required_by: [https://mcp.grin.co/mcp]
+  sources: [well-known/grin-openid-configuration.json, well-known/grin-oauth-protected-resource.json]
+- scope: email
+  description: Email address of the authenticated GRIN user.
+  flows: [authorizationCode, deviceCode]
+  required_by: [https://mcp.grin.co/mcp]
+  sources: [well-known/grin-openid-configuration.json, well-known/grin-oauth-protected-resource.json]
+- scope: email_verified
+  description: Whether the user's email address has been verified.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: offline_access
+  description: Issues a refresh token for long-lived access.
+  flows: [authorizationCode, deviceCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: name
+  description: Full name claim.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: given_name
+  description: Given-name claim.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: family_name
+  description: Family-name claim.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: nickname
+  description: Nickname claim.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: picture
+  description: Profile picture claim.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: created_at
+  description: Account creation timestamp claim.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: identities
+  description: Linked identity-provider records for the user.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: phone
+  description: Phone-number claim.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+- scope: address
+  description: Address claim.
+  flows: [authorizationCode]
+  sources: [well-known/grin-openid-configuration.json]
+
+mcp_resource:
+  resource: https://mcp.grin.co/mcp
+  authorization_servers: [https://auth.grin.co/]
+  scopes_supported: [openid, email, profile]
+  source: well-known/grin-oauth-protected-resource.json
+
+gaps:
+- id: no-product-scopes
+  detail: >-
+    No capability-level scopes are published. An agent authorizing against the
+    Gia MCP server presents only identity scopes, so a consumer cannot request
+    or reason about least privilege from the public surface.
+
+x-evidence:
+- url: https://auth.grin.co/.well-known/openid-configuration
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://mcp.grin.co/.well-known/oauth-protected-resource
+  http_status: 200
+  fetched: '2026-08-13'

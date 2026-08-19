@@ -1,0 +1,106 @@
+generated: '2026-08-13'
+method: probed
+source: https://auth.grin.co/.well-known/openid-configuration
+docs: https://grin.co/security/
+note: >-
+  No OpenAPI is publicly reachable for GRIN (see lifecycle/grin-lifecycle.yml —
+  the Stoplight documentation project GRIN links from its own docs host returns
+  404), so this profile is NOT derived from securitySchemes. It is probed
+  directly from the two anonymous discovery documents GRIN's own hosts serve:
+  the OIDC/RFC 8414 metadata on auth.grin.co (an Auth0 tenant on GRIN's domain)
+  and the RFC 9728 protected-resource metadata on mcp.grin.co. Those describe
+  the auth model in front of the GRIN app and the Gia MCP server. The
+  authentication model for the legacy read-only REST API described on the
+  Stoplight workspace home ("uses standard HTTP response codes and
+  authentication") is NOT publicly documented and is deliberately not guessed
+  here.
+
+summary:
+  types:
+  - openIdConnect
+  - oauth2
+  api_key_in: []
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+  - refreshToken
+  - deviceCode
+  - tokenExchange
+  pkce: true
+  dynamic_client_registration: true
+
+schemes:
+- name: GrinOIDC
+  type: openIdConnect
+  openIdConnectUrl: https://auth.grin.co/.well-known/openid-configuration
+  issuer: https://auth.grin.co/
+  provider: Auth0 (GRIN-operated tenant on auth.grin.co)
+  authorizationUrl: https://auth.grin.co/authorize
+  tokenUrl: https://auth.grin.co/oauth/token
+  userinfoUrl: https://auth.grin.co/userinfo
+  jwksUri: https://auth.grin.co/.well-known/jwks.json
+  registrationEndpoint: https://auth.grin.co/oidc/register
+  deviceAuthorizationEndpoint: https://auth.grin.co/oauth/device/code
+  code_challenge_methods:
+  - S256
+  - plain
+  response_types:
+  - code
+  - token
+  - id_token
+  - code token
+  - code id_token
+  - token id_token
+  - code token id_token
+  grant_types:
+  - client_credentials
+  - authorization_code
+  - refresh_token
+  - password
+  - implicit
+  - urn:ietf:params:oauth:grant-type:device_code
+  - urn:ietf:params:oauth:grant-type:token-exchange
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+  sources:
+  - well-known/grin-openid-configuration.json
+  - well-known/grin-oauth-authorization-server.json
+
+- name: GrinMCPBearer
+  type: oauth2
+  applies_to: https://mcp.grin.co/mcp
+  scheme: Bearer token in the Authorization header
+  bearer_methods_supported:
+  - header
+  authorization_servers:
+  - https://auth.grin.co/
+  scopes:
+  - openid
+  - email
+  - profile
+  challenge: >-
+    WWW-Authenticate: Bearer resource_metadata="https://mcp.grin.co/.well-known/oauth-protected-resource"
+  standard: RFC 9728 OAuth 2.0 Protected Resource Metadata
+  sources:
+  - well-known/grin-oauth-protected-resource.json
+
+app_login:
+  url: https://app.grin.co/login
+  flow: >-
+    app.grin.co 302s to https://auth.grin.co/authorize with response_type=code,
+    scope="openid profile email" and prompt=select_account — an authorization
+    code flow against the same tenant that fronts the MCP server.
+  observed_status: 302
+
+x-evidence:
+- url: https://auth.grin.co/.well-known/openid-configuration
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://auth.grin.co/.well-known/oauth-authorization-server
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://mcp.grin.co/.well-known/oauth-protected-resource
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://app.grin.co/
+  http_status: 302
+  fetched: '2026-08-13'

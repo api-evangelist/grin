@@ -1,0 +1,85 @@
+generated: '2026-08-13'
+method: searched
+source: https://grin.co/pricing
+currency: USD
+billing_period: monthly
+plan_count: 5
+model: >-
+  Usage-based credit metering. GRIN meters the work Gia performs — not seats and
+  not creator-list size. Credits cover sourcing, outreach, gifting, reporting,
+  contracts and workflows; heavier work consumes more credits per action. Unused
+  monthly credits do not roll over; purchased overage credits do. Billing is
+  month-to-month with no contract. The paid tiers from Growth up also bundle
+  GRIN Classic capacity, expressed as a ceiling on active creators.
+note: >-
+  GRIN publishes no API-specific plan, quota or add-on. API and MCP access are
+  not named as a tier feature anywhere on the pricing page, so no per-tier API
+  entitlement is recorded. The overage rate is described as "metered at a flat
+  rate under a brand-set cap" but the rate itself is not published.
+
+plans:
+- name: Free
+  price: 0
+  currency: USD
+  period: month
+  credits_included: 200
+  overage: none
+  overage_behavior: billable work pauses when credits run out
+  grin_classic: false
+  active_creator_limit: null
+  limits_note: No hard creator cap; throughput is bounded by credits.
+- name: Starter
+  price: 200
+  currency: USD
+  period: month
+  credits_included: 2000
+  overage: metered
+  overage_rate: null
+  overage_behavior: flat-rate metering under a brand-set spend cap
+  grin_classic: false
+  active_creator_limit: null
+- name: Growth
+  price: 500
+  currency: USD
+  period: month
+  credits_included: 7500
+  overage: metered
+  overage_rate: null
+  overage_behavior: flat-rate metering under a brand-set spend cap
+  grin_classic: true
+  active_creator_limit: 100
+  user_logins: 5
+  landing_pages: 10
+  email_templates: 150
+  popular: true
+- name: Scale
+  price: 1000
+  currency: USD
+  period: month
+  credits_included: 20000
+  overage: metered
+  overage_rate: null
+  overage_behavior: flat-rate metering under a brand-set spend cap
+  grin_classic: true
+  active_creator_limit: 250
+  user_logins: 5
+  landing_pages: 10
+  email_templates: 150
+- name: Complete
+  price: 1500
+  currency: USD
+  period: month
+  credits_included: 30000
+  overage: metered
+  overage_rate: null
+  overage_behavior: flat-rate metering under a brand-set spend cap
+  grin_classic: true
+  active_creator_limit: 500
+  user_logins: 5
+  landing_pages: 10
+  email_templates: 150
+
+x-evidence:
+- url: https://grin.co/pricing
+  http_status: 200
+  fetched: '2026-08-13'

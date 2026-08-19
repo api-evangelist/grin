@@ -1,0 +1,120 @@
+generated: '2026-08-13'
+method: probed
+source: live discovery documents on auth.grin.co and mcp.grin.co, plus https://grin.co/security/
+note: >-
+  Every assertion below is grounded in a document actually fetched from a
+  GRIN-controlled host, or in an explicit claim on GRIN's own security page.
+  Standards that cannot be checked because no OpenAPI is publicly reachable are
+  recorded as unknown, not false.
+
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    auth.grin.co serves RFC 8414 authorization-server metadata advertising
+    authorization_code, client_credentials, refresh_token, device_code and
+    token-exchange grants at https://auth.grin.co/oauth/token.
+  source: well-known/grin-oauth-authorization-server.json
+- id: oidc
+  conforms: true
+  evidence: >-
+    https://auth.grin.co/.well-known/openid-configuration returns a full OIDC
+    discovery document (issuer, authorization, token, userinfo, jwks endpoints).
+  source: well-known/grin-openid-configuration.json
+- id: rfc8414-authorization-server-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns 200 JSON on auth.grin.co.
+- id: rfc9728-protected-resource-metadata
+  conforms: true
+  evidence: >-
+    mcp.grin.co returns 401 with
+    WWW-Authenticate: Bearer resource_metadata="https://mcp.grin.co/.well-known/oauth-protected-resource"
+    and that document names the resource and its authorization server.
+  source: well-known/grin-oauth-protected-resource.json
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported includes S256.
+- id: oauth2-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint https://auth.grin.co/oidc/register is advertised.
+- id: mcp
+  conforms: true
+  evidence: >-
+    GRIN operates a hosted MCP server at https://mcp.grin.co/mcp and states on
+    https://grin.co/gia that "Gia connects to Claude, ChatGPT, and other
+    assistants that support MCP". Protocol version could not be read because
+    initialize is auth-gated.
+  detail: mcp/grin-mcp.yml
+- id: llms-txt
+  conforms: true
+  evidence: https://grin.co/llms.txt returns 200 with a conformant llms.txt document.
+  source: llms/grin-llms.txt
+- id: content-signal
+  conforms: true
+  evidence: >-
+    https://grin.co/robots.txt emits "Content-Signal: search=yes, ai-input=yes,
+    ai-train=no" and differentiates retrieval crawlers from training crawlers.
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json return 404 on all
+    seven GRIN hosts probed.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    No security.txt on grin.co or api.grin.co. The 200 at
+    help.grin.co/.well-known/security.txt is Intercom's, canonical
+    app.intercom.com — not GRIN's.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    The only observable error body (MCP 401) is a flat {"error","message"} JSON
+    object served as application/json, not application/problem+json.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI is publicly reachable. The linked Stoplight project
+    grin-open-api-docs returns 404 and every candidate spec path on the
+    Stoplight node API returns 404.
+- id: asyncapi
+  conforms: unknown
+  evidence: No event, streaming or webhook surface is publicly documented.
+- id: rfc8594-sunset
+  conforms: unknown
+  evidence: No reachable API host on which to observe Sunset/Deprecation headers.
+
+compliance:
+- id: soc2-type-ii
+  claimed: true
+  scope: Security, Availability, Integrity, Confidentiality
+  evidence: >-
+    https://grin.co/security/ states SOC 2 Type II compliance; the report is
+    available under NDA on request.
+- id: gdpr
+  claimed: true
+  evidence: https://grin.co/security/ states GDPR compliance and links a DPA and subprocessor list.
+- id: iso-27001
+  claimed: false
+- id: pci-dss
+  claimed: false
+- id: hipaa
+  claimed: false
+- id: fedramp
+  claimed: false
+
+x-evidence:
+- url: https://auth.grin.co/.well-known/openid-configuration
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://mcp.grin.co/.well-known/oauth-protected-resource
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://grin.co/security/
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://grin.co/llms.txt
+  http_status: 200
+  fetched: '2026-08-13'
+- url: https://grin.co/robots.txt
+  http_status: 200
+  fetched: '2026-08-13'
