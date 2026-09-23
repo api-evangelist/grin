@@ -1,19 +1,35 @@
-generated: '2026-08-13'
+generated: '2026-09-19'
 method: probed
 source: live GET of /.well-known/* on every GRIN-controlled host found in apis.yml
-note: >-
-  Probed five GRIN hosts. The marketing site (grin.co) and the Stoplight-hosted
-  documentation host (api.grin.co) serve nothing at /.well-known/ — every path
-  returns the site's own HTML 404. The real discovery surface sits on the two
-  hosts that actually carry the agent/identity plumbing: auth.grin.co (GRIN's
-  Auth0 tenant, which serves OIDC discovery and RFC 8414 authorization-server
-  metadata) and mcp.grin.co (GRIN's hosted MCP server, which serves RFC 9728
-  OAuth protected-resource metadata pointing back at auth.grin.co).
+note: 'Probed five GRIN hosts. The marketing site (grin.co) and the Stoplight-hosted documentation host
+  (api.grin.co) serve nothing at /.well-known/ — every path returns the site''s own HTML 404. The real
+  discovery surface sits on the two hosts that actually carry the agent/identity plumbing: auth.grin.co
+  (GRIN''s Auth0 tenant, which serves OIDC discovery and RFC 8414 authorization-server metadata) and mcp.grin.co
+  (GRIN''s hosted MCP server, which serves RFC 9728 OAuth protected-resource metadata pointing back at
+  auth.grin.co).
+
+
+  MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s primary
+  hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed and
+  were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'
 hosts:
 - host: https://auth.grin.co
   role: identity provider (Auth0 tenant) for app.grin.co and mcp.grin.co
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: grin-auth-oauth-authorization-server.json
+    bytes: 2560
+  path_echo_control: passed
 - host: https://mcp.grin.co
   role: hosted remote MCP server (Gia)
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: grin-mcp-oauth-protected-resource.json
+    bytes: 191
+  path_echo_control: passed
 - host: https://grin.co
   role: marketing site
 - host: https://api.grin.co
@@ -41,14 +57,11 @@ documents:
   status: 200
   content_type: text/plain
   file: null
-  note: >-
-    A real RFC 9116 document is served here, but it is INTERCOM's, not GRIN's —
-    Canonical is https://app.intercom.com/.well-known/security.txt and the
-    contacts are security@intercom.com / bugcrowd.com/intercom. help.grin.co is
-    a vendor-hosted help center, so this document says nothing about GRIN's own
-    disclosure program. Not saved and not wired as a SecurityTxt pointer;
-    GRIN's own disclosure posture is captured in
-    security/grin-vulnerability-disclosure.yml from https://grin.co/security/.
+  note: A real RFC 9116 document is served here, but it is INTERCOM's, not GRIN's — Canonical is https://app.intercom.com/.well-known/security.txt
+    and the contacts are security@intercom.com / bugcrowd.com/intercom. help.grin.co is a vendor-hosted
+    help center, so this document says nothing about GRIN's own disclosure program. Not saved and not
+    wired as a SecurityTxt pointer; GRIN's own disclosure posture is captured in security/grin-vulnerability-disclosure.yml
+    from https://grin.co/security/.
 - host: https://grin.co
   path: /.well-known/security.txt
   status: 404
@@ -109,12 +122,22 @@ documents:
   status: 404
 agent_card:
   found: false
-  note: >-
-    /.well-known/agent-card.json and /.well-known/agent.json were probed on
-    grin.co, api.grin.co, auth.grin.co, mcp.grin.co, status.grin.co,
-    community.grin.co and creators.grin.co. Every one returned 404. No A2A
-    agent card exists, so no a2a/ artifact was written.
+  note: /.well-known/agent-card.json and /.well-known/agent.json were probed on grin.co, api.grin.co,
+    auth.grin.co, mcp.grin.co, status.grin.co, community.grin.co and creators.grin.co. Every one returned
+    404. No A2A agent card exists, so no a2a/ artifact was written.
 x-evidence:
   fetched: '2026-08-13'
   probes: 40
   hits: 4
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://mcp.grin.co
+    path: /.well-known/oauth-protected-resource
+    file: grin-mcp-oauth-protected-resource.json
+  - host: https://auth.grin.co
+    path: /.well-known/oauth-authorization-server
+    file: grin-auth-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host
