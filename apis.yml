@@ -45,7 +45,7 @@ accessModel:
 image: https://grin.co/wp-content/uploads/2022/11/2022_GRIN_Logo_Black_Transparent-Bkgnd-small.webp
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-08-13'
+modified: '2026-10-06'
 x-docs-platform: stoplight
 x-docs-platform-confidence: high
 x-docs-platform-checked: 2026-10-03
@@ -115,6 +115,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- url: https://grin.co/blog/feed/
+  type: BlogRSS
 - type: TrustCenter
   url: security/grin-trust-center.yml
 - type: VulnerabilityDisclosure
