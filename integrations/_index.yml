@@ -27,5 +27,5 @@
     - connectors/applications/grin
     vendor_link: https://grin.co/
     builder: Fivetran
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
