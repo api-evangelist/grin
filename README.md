@@ -64,6 +64,124 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Grin is a company surfaced as a portfolio company of 500-global, bond-capital, bullpen-capital and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+GRIN is a creator management and influencer marketing platform for consumer and eCommerce brands, operating in the creator economy. Brands use GRIN to discover creators, manage relationships and content, run affiliate and ambassador programs, handle creator payments, track performance, and measure ROI at scale. The product line includes GRIN Classic, a manual creator and affiliate management platform, and Gia, an AI assistant that automates affiliate program management. GRIN exposes a bi-directional REST API (documented on Stoplight at api.grin.co) so a brand's own software can synchronize creators, content, and program data with GRIN, alongside native integrations for Shopify, Klaviyo, PayPal, Slack, and other commerce tools.
 
-Backed by: 500-global, bond-capital, bullpen-capital — https://ongrin.com
+**Areas:** Company · Influencer Marketing · Creator Economy · Creator Management · Affiliate Marketing · Marketing · Social Media · E-Commerce
+
+## Grin on APIs.io
+
+Everything profiled for Grin is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/grin/](https://apis.io/providers/grin/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [GRIN API](https://apis.io/apis/grin/grin-api/) — GRIN's bi-directional REST API lets a brand's own software communicate with GRIN to synchronize creators, content, programs, and reporting data. Reference…
+- [GRIN Gia MCP Server](https://apis.io/apis/grin/grin-gia-mcp-server/) — GRIN's hosted remote Model Context Protocol server for Gia, its AI agent for creator marketing. GRIN documents that "Gia connects to Claude, ChatGPT, and…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [grin](https://apis.io/servers/grin/grin/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Grin Authentication](https://apis.io/security/grin/grin-authentication/)
+- [Grin Domain Security](https://apis.io/security/grin/grin-domain-security/)
+- [Grin Trust Center](https://apis.io/security/grin/grin-trust-center/)
+- [Grin Vulnerability Disclosure](https://apis.io/security/grin/grin-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Grin Scopes](https://apis.io/scopes/grin/grin-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Grin Plans Pricing](https://apis.io/plans/grin/grin-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Grin Rate Limits](https://apis.io/rate-limits/grin/grin-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://grin.co)
+- [Documentation](https://help.grin.co)
+- [API reference](https://api.grin.co/)
+- [Pricing](https://grin.co/pricing)
+- [Sign up](https://grin.co/get-started/)
+- [Support](https://help.grin.co)
+- [Blog](https://grin.co/blog)
+- [Security](https://grin.co/security/)
+- [Compliance](https://grin.co/security/)
+- [Terms of service](https://grin.co/terms/)
+- [Privacy policy](https://grin.co/privacy/)
+- [Status](https://status.grin.co/)
+
+## API Evangelist rating
+
+**Kin Score 45.1** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 45.2 |
+| Access clarity | 92.1 |
+
+**Agent readiness 29.9** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/grin/](https://apis.io/providers/grin/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Grin: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/grin/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
